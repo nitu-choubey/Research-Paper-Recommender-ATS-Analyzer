@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Research Paper Recommender</title>
+    <style>
+        body { font-family: Arial, sans-serif; margin: 40px; background-color: #f4f4f9; }
+        .nav a { margin-right: 15px; text-decoration: none; color: #007bff; font-weight: bold; }
+        form { margin-top: 20px; }
+        textarea { width: 100%; height: 100px; }
+        button { padding: 10px 20px; background-color: #28a745; color: white; border: none; cursor: pointer; margin-top: 10px; }
+        ul { background: white; padding: 20px; border-radius: 5px; }
+    </style>
+</head>
+<body>
+    <div class="nav">
+        <a href="/">Home</a> | <a href="/ats">ATS Analyzer</a>
+    </div>
+    <h1>Research Paper Recommendation</h1>
+    <form method="POST">
+        <label><b>Enter Topic or Abstract:</b></label><br><br>
+        <textarea name="input_paper" placeholder="Paste topic or paper summary here...">{{ input_paper }}</textarea><br>
+        <button type="submit">Get Recommendations</button>
+    </form>
+
+    {% if recommended_papers %}
+    <h2>Recommended Papers:</h2>
+    <ul>
+        {% for paper in recommended_papers %}
+            <li>{{ paper }}</li>
+        {% endfor %}
+    </ul>
+    {% endif %}
+</body>
+</html>

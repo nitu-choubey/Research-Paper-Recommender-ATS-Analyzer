@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>ATS Resume Analyzer</title>
+    <style>
+        body { font-family: Arial, sans-serif; margin: 40px; background-color: #f4f4f9; }
+        .nav a { margin-right: 15px; text-decoration: none; color: #007bff; font-weight: bold; }
+        form { background: white; padding: 20px; border-radius: 5px; width: 600px; }
+        input, textarea, select { width: 100%; margin-bottom: 15px; padding: 8px; }
+        button { padding: 10px 20px; background-color: #007bff; color: white; border: none; cursor: pointer; }
+        .result { background: #e9ecef; padding: 15px; margin-top: 20px; border-radius: 5px; white-space: pre-wrap; }
+    </style>
+</head>
+<body>
+    <div class="nav">
+        <a href="/">Home</a> | <a href="/research">Research Paper Recommender</a>
+    </div>
+    <h1>ATS Resume Analyzer</h1>
+    <form method="POST" enctype="multipart/form-data">
+        <label><b>Gemini API Key:</b></label>
+        <input type="password" name="api_key" required>
+
+        <label><b>Job Description:</b></label>
+        <textarea name="job_description" rows="4" required></textarea>
+
+        <label><b>Analysis Type:</b></label>
+        <select name="analysis_type">
+            <option value="Match Score">Match Score & Summary</option>
+            <option value="Detailed Review">Detailed HR Review</option>
+        </select>
+
+        <label><b>Upload Resume (PDF):</b></label>
+        <input type="file" name="resume" accept=".pdf" required>
+
+        <button type="submit">Analyze Resume</button>
+    </form>
+
+    {% if response %}
+    <div class="result">
+        <h2>Analysis Result:</h2>
+        <p>{{ response }}</p>
+        <form action="/download" method="POST">
+            <input type="hidden" name="analysis_text" value="{{ response }}">
+            <button type="submit" style="background-color: #28a745;">Download Result</button>
+        </form>
+    </div>
+    {% endif %}
+</body>
+</html>
